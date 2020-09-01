@@ -10,9 +10,9 @@ import 'package:timeago/timeago.dart' as timeago;
 class NewsCard extends StatefulWidget {
 
   News haber;
-  String kategori;
 
-  NewsCard({@required this.haber,@required this.kategori});
+
+  NewsCard({@required this.haber});
 
   @override
   _NewsCardState createState() => _NewsCardState();
@@ -26,7 +26,6 @@ class _NewsCardState extends State<NewsCard> {
   Widget build(BuildContext context) {
 
     News haber = widget.haber;
-    String kategori = widget.kategori;
     DateTime olusturulma = DateTime.parse(haber.created_date);
 
     return Container(
@@ -41,17 +40,7 @@ class _NewsCardState extends State<NewsCard> {
         },
         child: Column(
           children: <Widget>[
-            SizedBox(height: 10),
-            //Kategori
-            Row(
-              children: <Widget>[
-                SizedBox(width: 30),
-                kategoriIconPicker(kategori),
-                SizedBox(width: 20),
-                Text(kategori)
-              ],
-            ),
-            SizedBox(height: 10),
+
 
             // Görsel
             Hero(
@@ -137,19 +126,6 @@ class _NewsCardState extends State<NewsCard> {
     );
   }
 
-  Icon kategoriIconPicker(String kategori){
 
-    if(kategori == "Ana Sayfa"){
-      return Icon(FontAwesome.newspaper_o);
-    }else if (kategori == "Futbol"){
-      return Icon(Ionicons.ios_football);
-    }else if (kategori == "Basketbol"){
-      return Icon(Ionicons.ios_basketball);
-    }else if (kategori == "Voleybol"){
-      return Icon(FlutterIcons.volleyball_mco);
-    }else{
-      return Icon(MaterialCommunityIcons.newspaper_variant_multiple_outline);
-    }
-  }
 
 }

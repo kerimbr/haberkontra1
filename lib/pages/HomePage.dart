@@ -8,6 +8,7 @@ import 'package:haberkontra1/models/api_model.dart';
 import 'package:haberkontra1/utils/api_details.dart';
 import 'package:haberkontra1/widgets/news_card.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -134,7 +135,7 @@ class _HomePageState extends State<HomePage> {
         return Divider();
       },
       itemBuilder: (context,index){
-        return NewsCard(haber: snapshot.news[index],kategori: "Ana Sayfa",);
+       return NewsCard(haber: snapshot.news[index]);
       },
     );
   }
@@ -147,7 +148,7 @@ class _HomePageState extends State<HomePage> {
         return Divider();
       },
       itemBuilder: (context,index){
-        return NewsCard(haber: snapshot.news[index],kategori: "Futbol",);
+        return NewsCard(haber: snapshot.news[index]);
       },
     );
   }
@@ -160,7 +161,7 @@ class _HomePageState extends State<HomePage> {
         return Divider();
       },
       itemBuilder: (context,index){
-        return NewsCard(haber: snapshot.news[index],kategori: "Basketbol",);
+        return NewsCard(haber: snapshot.news[index]);
       },
     );
 
@@ -174,7 +175,7 @@ class _HomePageState extends State<HomePage> {
         return Divider();
       },
       itemBuilder: (context,index){
-        return NewsCard(haber: snapshot.news[index],kategori: "Voleybol",);
+        return NewsCard(haber: snapshot.news[index]);
       },
     );
 
@@ -188,7 +189,7 @@ class _HomePageState extends State<HomePage> {
         return Divider();
       },
       itemBuilder: (context,index){
-        return NewsCard(haber: snapshot.news[index],kategori: "Diğer Haberler",);
+        return NewsCard(haber: snapshot.news[index]);
       },
     );
 
@@ -256,7 +257,7 @@ class _HomePageState extends State<HomePage> {
           //Instagram
           ListTile(
             onTap: (){
-
+              _launchURL("https://www.instagram.com/haberkontra/");
             },
             leading: Icon(
               Entypo.instagram,
@@ -273,7 +274,7 @@ class _HomePageState extends State<HomePage> {
           //Twitter
           ListTile(
             onTap: (){
-
+              _launchURL("https://twitter.com/haberkontra");
             },
             leading: Icon(
               AntDesign.twitter,
@@ -290,7 +291,7 @@ class _HomePageState extends State<HomePage> {
           //youtube
           ListTile(
             onTap: (){
-
+              _launchURL("https://www.youtube.com/haberkontra");
             },
             leading: Icon(
               AntDesign.youtube,
@@ -307,7 +308,7 @@ class _HomePageState extends State<HomePage> {
           //Facebook
           ListTile(
             onTap: (){
-
+              _launchURL("https://www.facebook.com/haberkontra/");
             },
             leading: Icon(
               AntDesign.facebook_square,
@@ -324,6 +325,14 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
 
